@@ -1,0 +1,6 @@
+@GestionDeudas.API_HostAddress = http://localhost:5002
+
+GET {{GestionDeudas.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
