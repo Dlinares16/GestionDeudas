@@ -1,4 +1,6 @@
 ﻿using GestionDeudas.DAL.DBContext;
+using GestionDeudas.DAL.Repositorios;
+using GestionDeudas.DAL.Repositorios.Contrato;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,8 @@ namespace GestionDeudas.IOC
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
     }
 }
