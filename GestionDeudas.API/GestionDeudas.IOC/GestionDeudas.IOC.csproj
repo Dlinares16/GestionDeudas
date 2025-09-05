@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GestionDeudas.BLL\GestionDeudas.BLL.csproj" />
     <ProjectReference Include="..\GestionDeudas.DAL\GestionDeudas.DAL.csproj" />
     <ProjectReference Include="..\GestionDeudas.Utility\GestionDeudas.Utility.csproj" />

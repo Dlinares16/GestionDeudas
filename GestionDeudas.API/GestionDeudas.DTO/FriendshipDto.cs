@@ -54,6 +54,6 @@ namespace GestionDeudas.DTO
         public Guid RequesterId { get; set; }
         public string RequesterName { get; set; } = null!;
         public string RequesterEmail { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

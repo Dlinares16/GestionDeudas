@@ -1,6 +1,9 @@
-﻿using GestionDeudas.DAL.DBContext;
+﻿using GestionDeudas.BLL.Servicios;
+using GestionDeudas.BLL.Servicios.Contrato;
+using GestionDeudas.DAL.DBContext;
 using GestionDeudas.DAL.Repositorios;
 using GestionDeudas.DAL.Repositorios.Contrato;
+using GestionDeudas.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,13 @@ namespace GestionDeudas.IOC
             });
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFriendshipService, FriendshipService>();
+            services.AddScoped<IDebtService, DebtService>();
+            services.AddScoped<IPaymentService, PaymentService>();
         }
     }
 }
