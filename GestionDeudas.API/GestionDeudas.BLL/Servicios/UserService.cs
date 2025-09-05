@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestionDeudas.BLL.Servicios.Contrato;
+using GestionDeudas.DAL.DBContext;
 using GestionDeudas.DAL.Repositorios.Contrato;
 using GestionDeudas.DTO;
 using GestionDeudas.Model;
@@ -16,9 +17,9 @@ namespace GestionDeudas.BLL.Servicios
     {
         private readonly IGenericRepository<User> _userRepository;
         private readonly IMapper _mapper;
-        private readonly DbContext _context;
+        private readonly GestionDeudasContext _context;
 
-        public UserService(IGenericRepository<User> userRepository, IMapper mapper, DbContext context)
+        public UserService(IGenericRepository<User> userRepository, IMapper mapper, GestionDeudasContext context)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -50,8 +51,8 @@ namespace GestionDeudas.BLL.Servicios
 
             var user = _mapper.Map<User>(createUserDto);
             user.UserId = Guid.NewGuid();
-            user.CreatedAt = DateTime.UtcNow;
-            user.UpdatedAt = DateTime.UtcNow;
+            user.CreatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
 
             var createdUser = await _userRepository.Crear(user);
             return _mapper.Map<UserDto>(createdUser);
@@ -63,7 +64,7 @@ namespace GestionDeudas.BLL.Servicios
             if (existingUser == null) return null;
 
             _mapper.Map(updateUserDto, existingUser);
-            existingUser.UpdatedAt = DateTime.UtcNow;
+            existingUser.UpdatedAt = DateTime.Now;
 
             await _userRepository.Editar(existingUser);
             return _mapper.Map<UserDto>(existingUser);
@@ -83,7 +84,7 @@ namespace GestionDeudas.BLL.Servicios
             if (user == null) return false;
 
             user.IsActive = false;
-            user.UpdatedAt = DateTime.UtcNow;
+            user.UpdatedAt = DateTime.Now;
 
             return await _userRepository.Editar(user);
         }
@@ -94,7 +95,7 @@ namespace GestionDeudas.BLL.Servicios
             if (user == null) return false;
 
             user.IsActive = true;
-            user.UpdatedAt = DateTime.UtcNow;
+            user.UpdatedAt = DateTime.Now;
 
             return await _userRepository.Editar(user);
         }
@@ -129,7 +130,7 @@ namespace GestionDeudas.BLL.Servicios
             if (user == null) return false;
 
             user.EmailVerified = true;
-            user.UpdatedAt = DateTime.UtcNow;
+            user.UpdatedAt = DateTime.Now;
 
             return await _userRepository.Editar(user);
         }

@@ -1,4 +1,5 @@
-﻿using GestionDeudas.DAL.Repositorios.Contrato;
+﻿using GestionDeudas.DAL.DBContext;
+using GestionDeudas.DAL.Repositorios.Contrato;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace GestionDeudas.DAL.Repositorios
 {
     public class GenericRepository<TModel> : IGenericRepository<TModel> where TModel : class
     {
-        private readonly DbContext _context;
-        public GenericRepository(DbContext context)
+        private readonly GestionDeudasContext _context;
+        public GenericRepository(GestionDeudasContext context)
         {
             _context = context;
         }

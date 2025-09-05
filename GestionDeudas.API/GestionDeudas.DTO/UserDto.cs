@@ -32,6 +32,8 @@ namespace GestionDeudas.DTO
         [MinLength(6)]
         public string Password { get; set; } = null!;
 
+        public string PasswordHash { get; set; } = null!;
+
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; } = null!;

@@ -16,12 +16,12 @@ namespace GestionDeudas.Utility
             // User mappings
             CreateMap<User, UserDto>();
             CreateMap<CreateUserDto, User>()
-                .ForMember(dest => dest.UserId, opt => opt.Ignore())
-                .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
+                //.ForMember(dest => dest.UserId, opt => opt.Ignore())
+                //.ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true))
-                .ForMember(dest => dest.EmailVerified, opt => opt.MapFrom(src => false))
-                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+                .ForMember(dest => dest.EmailVerified, opt => opt.MapFrom(src => false));
+                //.ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                //.ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
             CreateMap<UpdateUserDto, User>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

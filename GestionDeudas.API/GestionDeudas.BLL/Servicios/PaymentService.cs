@@ -96,7 +96,7 @@ namespace GestionDeudas.BLL.Servicios
 
             var payment = _mapper.Map<Payment>(createPaymentDto);
             payment.PaymentId = Guid.NewGuid();
-            payment.CreatedAt = DateTime.UtcNow;
+            payment.CreatedAt = DateTime.Now;
 
             var createdPayment = await _paymentRepository.Crear(payment);
 
@@ -105,7 +105,7 @@ namespace GestionDeudas.BLL.Servicios
             if (newTotalPaid >= debt.Amount)
             {
                 debt.Status = "paid";
-                debt.UpdatedAt = DateTime.UtcNow;
+                debt.UpdatedAt = DateTime.Now;
                 await _debtRepository.Editar(debt);
             }
 
@@ -128,7 +128,7 @@ namespace GestionDeudas.BLL.Servicios
                 if (remainingPayments < debt.Amount)
                 {
                     debt.Status = "pending";
-                    debt.UpdatedAt = DateTime.UtcNow;
+                    debt.UpdatedAt = DateTime.Now;
                     await _debtRepository.Editar(debt);
                 }
             }

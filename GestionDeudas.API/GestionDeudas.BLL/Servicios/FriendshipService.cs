@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestionDeudas.BLL.Servicios.Contrato;
+using GestionDeudas.DAL.DBContext;
 using GestionDeudas.DAL.Repositorios.Contrato;
 using GestionDeudas.DTO;
 using GestionDeudas.Model;
@@ -17,9 +18,9 @@ namespace GestionDeudas.BLL.Servicios
         private readonly IGenericRepository<Friendship> _friendshipRepository;
         private readonly IGenericRepository<User> _userRepository;
         private readonly IMapper _mapper;
-        private readonly DbContext _context;
+        private readonly GestionDeudasContext _context;
 
-        public FriendshipService(IGenericRepository<Friendship> friendshipRepository, IGenericRepository<User> userRepository, IMapper mapper, DbContext context)
+        public FriendshipService(IGenericRepository<Friendship> friendshipRepository, IGenericRepository<User> userRepository, IMapper mapper, GestionDeudasContext context)
         {
             _friendshipRepository = friendshipRepository;
             _userRepository = userRepository;
@@ -99,8 +100,8 @@ namespace GestionDeudas.BLL.Servicios
             var friendship = _mapper.Map<Friendship>(createFriendshipDto);
             friendship.FriendshipId = Guid.NewGuid();
             friendship.RequesterId = requesterId;
-            friendship.CreatedAt = DateTime.UtcNow;
-            friendship.UpdatedAt = DateTime.UtcNow;
+            friendship.CreatedAt = DateTime.Now;
+            friendship.UpdatedAt = DateTime.Now;
 
             var createdFriendship = await _friendshipRepository.Crear(friendship);
 
@@ -119,7 +120,7 @@ namespace GestionDeudas.BLL.Servicios
                 return false;
 
             friendship.Status = "accepted";
-            friendship.UpdatedAt = DateTime.UtcNow;
+            friendship.UpdatedAt = DateTime.Now;
 
             return await _friendshipRepository.Editar(friendship);
         }
@@ -140,7 +141,7 @@ namespace GestionDeudas.BLL.Servicios
                 return false;
 
             friendship.Status = "blocked";
-            friendship.UpdatedAt = DateTime.UtcNow;
+            friendship.UpdatedAt = DateTime.Now;
 
             return await _friendshipRepository.Editar(friendship);
         }

@@ -117,8 +117,8 @@ namespace GestionDeudas.BLL.Servicios
             var debt = _mapper.Map<Debt>(createDebtDto);
             debt.DebtId = Guid.NewGuid();
             debt.CreditorId = creditorId;
-            debt.CreatedAt = DateTime.UtcNow;
-            debt.UpdatedAt = DateTime.UtcNow;
+            debt.CreatedAt = DateTime.Now;
+            debt.UpdatedAt = DateTime.Now;
 
             var createdDebt = await _debtRepository.Crear(debt);
             return await GetDebtByIdAsync(createdDebt.DebtId) ?? _mapper.Map<DebtDto>(createdDebt);
@@ -130,7 +130,7 @@ namespace GestionDeudas.BLL.Servicios
             if (existingDebt == null) return null;
 
             _mapper.Map(updateDebtDto, existingDebt);
-            existingDebt.UpdatedAt = DateTime.UtcNow;
+            existingDebt.UpdatedAt = DateTime.Now;
 
             await _debtRepository.Editar(existingDebt);
             return await GetDebtByIdAsync(debtId);
@@ -150,7 +150,7 @@ namespace GestionDeudas.BLL.Servicios
             if (debt == null) return false;
 
             debt.Status = "paid";
-            debt.UpdatedAt = DateTime.UtcNow;
+            debt.UpdatedAt = DateTime.Now;
 
             return await _debtRepository.Editar(debt);
         }
@@ -161,7 +161,7 @@ namespace GestionDeudas.BLL.Servicios
             if (debt == null) return false;
 
             debt.Status = "cancelled";
-            debt.UpdatedAt = DateTime.UtcNow;
+            debt.UpdatedAt = DateTime.Now;
 
             return await _debtRepository.Editar(debt);
         }

@@ -48,15 +48,15 @@ namespace GestionDeudas.BLL.Servicios
 
             var accessToken = GenerateAccessToken(user);
             var refreshToken = GenerateRefreshToken();
-            var expiresAt = DateTime.UtcNow.AddDays(7);
+            var expiresAt = DateTime.UtcNow.AddDays(int.Parse(_configuration["Jwt:RefreshTokenExpirationDays"] ?? "7"));
 
             var session = new UserSession
             {
                 SessionId = Guid.NewGuid(),
                 UserId = user.UserId,
                 RefreshToken = refreshToken,
-                ExpiresAt = expiresAt,
-                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.SpecifyKind(expiresAt, DateTimeKind.Unspecified),
+                CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
                 IsActive = true
             };
 
@@ -90,7 +90,7 @@ namespace GestionDeudas.BLL.Servicios
             // Crear nueva sesión
             var newAccessToken = GenerateAccessToken(user);
             var newRefreshToken = GenerateRefreshToken();
-            var newExpiresAt = DateTime.UtcNow.AddDays(7);
+            var newExpiresAt = DateTime.UtcNow.AddDays(int.Parse(_configuration["Jwt:RefreshTokenExpirationDays"] ?? "7"));
 
             var newSession = new UserSession
             {
@@ -176,7 +176,7 @@ namespace GestionDeudas.BLL.Servicios
         {
             var verification = await _verificationRepository.Obtener(v =>
                 v.VerificationToken == resetPasswordDto.Token &&
-                !v.IsUsed == true &&
+                v.IsUsed == false &&
                 v.ExpiresAt > DateTime.UtcNow);
 
             if (verification == null) return false;
@@ -231,7 +231,7 @@ namespace GestionDeudas.BLL.Servicios
             var verification = await _verificationRepository.Obtener(v =>
                 v.VerificationToken == verifyEmailDto.Token &&
                 v.UserId == verifyEmailDto.UserId &&
-                !v.IsUsed == true &&
+                v.IsUsed == false &&
                 v.ExpiresAt > DateTime.UtcNow);
 
             if (verification == null) return false;
