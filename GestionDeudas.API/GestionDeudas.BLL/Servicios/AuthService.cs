@@ -120,10 +120,13 @@ namespace GestionDeudas.BLL.Servicios
                 s.RefreshToken == refreshToken &&
                 s.IsActive == true);
 
-            if (session == null) return false;
+            //if (session == null) 
+            
+                return false;
 
-            session.IsActive = false;
-            return await _sessionRepository.Editar(session);
+            //session.IsActive = false;
+            //session.ExpiresAt = DateTime.Now;
+            //return await _sessionRepository.Editar(session);
         }
 
         public async Task<bool> ChangePasswordAsync(Guid userId, ChangePasswordDto changePasswordDto)

@@ -47,7 +47,7 @@ namespace GestionDeudas.API.Controllers
                 var user = await _userService.CreateUserAsync(createUserDto);
 
                 // Generar token de verificación de email
-                var verificationToken = await _authService.GenerateEmailVerificationTokenAsync(user.UserId);
+                //var verificationToken = await _authService.GenerateEmailVerificationTokenAsync(user.UserId);
 
                 // Aquí enviarías el email de verificación
                 // EmailService.SendVerificationEmail(user.Email, verificationToken);
