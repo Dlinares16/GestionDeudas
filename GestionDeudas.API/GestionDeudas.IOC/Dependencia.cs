@@ -1,4 +1,7 @@
-﻿using GestionDeudas.BLL.Servicios;
+﻿using Amazon.DynamoDBv2;
+using GestionDeudas.BLL.AWS;
+using GestionDeudas.BLL.AWS.Contrato;
+using GestionDeudas.BLL.Servicios;
 using GestionDeudas.BLL.Servicios.Contrato;
 using GestionDeudas.DAL.DBContext;
 using GestionDeudas.DAL.Repositorios;
@@ -27,13 +30,16 @@ namespace GestionDeudas.IOC
             });
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddAutoMapper(typeof(AutoMapperProfile)); 
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+            services.AddDefaultAWSOptions(configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonDynamoDB>();
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFriendshipService, FriendshipService>();
             services.AddScoped<IDebtService, DebtService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ICacheAWS, CacheAWS>();
         }
     }
 }
