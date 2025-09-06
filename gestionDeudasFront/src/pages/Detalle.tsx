@@ -55,6 +55,7 @@ const Detalle: React.FC = () => {
         editing={editing}
         isUpdating={isUpdating}
         isDeleting={isDeleting}
+        deudaStatus={deuda.status}
         onBack={handleBack}
         onEdit={() => setEditing(true)}
         onSave={handleSave}

@@ -28,6 +28,9 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
     }
   };
 
+  // No permitir edición si la deuda está pagada
+  const canEdit = editing && deuda.status !== "paid";
+
   return (
     <div className="detail-card">
       <div className="card-header">
@@ -35,12 +38,15 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
         <span className={`status-badge status-${deuda.status}`}>
           {getStatusLabel(deuda.status)}
         </span>
+        {deuda.status === "paid" && editing && (
+          <span className="info-message">Las deudas pagadas no se pueden modificar</span>
+        )}
       </div>
 
       <div className="detail-grid">
         <div className="detail-field">
           <label>Descripción</label>
-          {editing ? (
+          {canEdit ? (
             <textarea
               value={formData.description}
               onChange={(e) => onFieldChange("description", e.target.value)}
@@ -54,7 +60,7 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
 
         <div className="detail-field">
           <label>Monto</label>
-          {editing ? (
+          {canEdit ? (
             <input
               type="number"
               step="0.01"
@@ -69,7 +75,7 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
 
         <div className="detail-field">
           <label>Fecha Límite</label>
-          {editing ? (
+          {canEdit ? (
             <input
               type="date"
               value={formData.dueDate}
@@ -83,7 +89,7 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
 
         <div className="detail-field">
           <label>Estado</label>
-          {editing ? (
+          {canEdit ? (
             <select
               value={formData.status}
               onChange={(e) => onFieldChange("status", e.target.value as any)}
@@ -91,7 +97,6 @@ const GeneralInfoCard: React.FC<GeneralInfoCardProps> = ({
             >
               <option value="pending">Pendiente</option>
               <option value="paid">Pagada</option>
-              <option value="overdue">Vencida</option>
             </select>
           ) : (
             <p>{getStatusLabel(deuda.status)}</p>

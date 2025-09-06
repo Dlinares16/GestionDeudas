@@ -129,6 +129,12 @@ namespace GestionDeudas.BLL.Servicios
             var existingDebt = await _debtRepository.Obtener(d => d.DebtId == debtId);
             if (existingDebt == null) return null;
 
+            // Validar que la deuda no esté pagada
+            if (existingDebt.Status == "Paid" || existingDebt.Status == "Pagada")
+            {
+                throw new InvalidOperationException("No se puede editar una deuda que ya está pagada");
+            }
+
             _mapper.Map(updateDebtDto, existingDebt);
             existingDebt.UpdatedAt = DateTime.Now;
 
