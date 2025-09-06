@@ -1,0 +1,321 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin: 20px 0;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.modern-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  text-align: left;
+  padding: 16px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.modern-table td {
+  padding: 16px;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9375rem;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-paid {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-overdue {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.action-button svg {
+  flex-shrink: 0;
+}
+
+.view-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.view-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.edit-button {
+  background-color: #10b981;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  background-color: #ef4444;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-container {
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+
+  .modern-table th,
+  .modern-table td {
+    padding: 12px;
+  }
+
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 0.8125rem;
+  }
+
+  .action-button {
+    padding: 6px 10px;
+    font-size: 0.8125rem;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-message {
+  color: #dc2626;
+  text-align: center;
+  padding: 20px;
+  background-color: #fee2e2;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.error-icon {
+  color: #dc2626;
+  opacity: 0.8;
+}
+
+.error-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.error-message {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+  background: none;
+  padding: 0;
+}
+
+.retry-button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  color: #9ca3af;
+  opacity: 0.6;
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.empty-message {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.add-debt-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.add-debt-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive adjustments for empty states */
+@media (max-width: 768px) {
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+
+  .empty-container,
+  .error-container {
+    max-width: 100%;
+  }
+
+  .empty-title {
+    font-size: 1.25rem;
+  }
+
+  .empty-message {
+    font-size: 0.875rem;
+  }
+
+  /* Hacer botones más compactos en móvil */
+  .action-button {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    margin-right: 4px;
+  }
+}
+
+/* Solo mostrar iconos en pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .action-button {
+    padding: 8px;
+    margin-right: 4px;
+  }
+
+  .action-button svg {
+    width: 14px;
+    height: 14px;
+  }
+}
